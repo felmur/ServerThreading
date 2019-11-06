@@ -14,6 +14,7 @@
 #include "global.h"
 #include <QThread>
 #include <QTcpSocket>
+#include <QMap>
 
 class sockThread : public QThread
 {

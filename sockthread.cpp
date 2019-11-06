@@ -36,14 +36,41 @@ void sockThread::run(){
 void sockThread::workOnData(){
     QByteArray bf = sk->readAll().toLower().trimmed();
     qDebug() << QThread::currentThreadId() << ": received '" << bf.data() << "'";
-    QString s = QString("I've received this: '%1'\n").arg(bf.data());
-    sk->write(s.toUtf8().data(), s.length());
-    if (bf == "quit") {
-        qDebug() << QThread::currentThreadId() << ": QUIT RECEIVED!";
-        goquit = true;
+
+    QMap<QString, uint> map;
+    map.insert("list",1);
+    map.insert("text",2);
+    map.insert("help",8);
+    map.insert("quit",9);
+
+    switch(map[bf.data()]) {
+
+    case 1: // list
+        sk->write("Simulates a ls -l\n");
+        sk->write("-rwxr-xr-x  1 felice felice  17272  7 apr  2019  serial\n"
+                  "-rw-r--r--  1 felice felice   2869  7 apr  2019  serial.c\n"
+                  "-rw-r--r--  1 felice felice   1204 16 apr  2018  term.py\n\n");
+        break;
+    case 2: // text
+        sk->write("Simulates a cat of a textfile\n");
+        sk->write("The quick brown fox jumps over the lazy dog\n"
+                  "The quick brown fox jumps over the lazy dog\n"
+                  "The quick brown fox jumps over the lazy dog\n"
+                  "The quick brown fox jumps over the lazy dog\n\n");
+        break;
+
+    case 8:
+        sk->write("Type 'list' to simulate a ls -l\n"
+                  "Type 'text' to simulate a cat of a textfile\n\n");
+        break;
+
+    case 9:
+        sk->write("QUIT!\n");
+        goquit=true;
+        break;
+
     }
 }
-
 
 sockThread::~sockThread()
 {

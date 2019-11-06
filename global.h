@@ -16,7 +16,6 @@
 #define RCU(x) reinterpret_cast<uint>(x)
 #define RCU64(x) reinterpret_cast<quint64>(x)
 
-
 extern QString prgname;
 extern QString version;
 extern QString author;
