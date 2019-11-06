@@ -4,8 +4,8 @@
  * (c) 2019 by Felice Murolo, Salerno, Italia
  * all rights reserved
  * email: linuxboy@giove.tk
- * license: released under LGPL license
- * see: https://www.gnu.org/licenses/lgpl-3.0.html
+ * license: released under GPL license
+ * see: https://www.gnu.org/licenses/gpl-3.0.html
  *
 ***************************************************/
 #ifndef SOCKTHREAD_H
